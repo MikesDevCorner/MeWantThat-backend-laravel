@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Api\ShoppinglistController;
+use App\Http\Controllers\Auth\ApiAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +15,27 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('lists', array('middleware' => 'cors', 'uses' => 'EinkaufslisteController@showLists'));
-Route::post('list', array('middleware' => 'cors', 'uses' => 'EinkaufslisteController@createList'));
-Route::delete('list/{idList}', array('middleware' => 'cors', 'uses' => 'EinkaufslisteController@deleteList'));
-Route::get('entries/{idList}', array('middleware' => 'cors', 'uses' => 'EinkaufslisteController@showListEntries'));
-Route::post('entry', array('middleware' => 'cors', 'uses' => 'EinkaufslisteController@createEntry'));
-Route::delete('entry/{id}', array('middleware' => 'cors', 'uses' => 'EinkaufslisteController@deleteEntry'));
+
+Route::group([
+    //'prefix' => 'v1',
+    //'as' => 'api.',
+    'middleware' => ['auth:api', 'cors']
+], function () {
+    Route::get('lists/', 'Api\ShoppinglistController@showLists');
+    Route::post('list/', 'Api\ShoppinglistController@createList');
+    Route::delete('list/{idList}/', 'Api\ShoppinglistController@deleteList');
+    Route::get('list/{idList}/entries/', 'Api\ShoppinglistController@showListEntries');
+    Route::post('list/{idList}/entry/', 'Api\ShoppinglistController@createEntry');
+    Route::delete('entry/{id}/', 'Api\ShoppinglistController@deleteEntry');
+    Route::get('me/', 'Auth\ApiAuthController@me');
+});
+
+
+Route::group([
+    //'prefix' => 'v1',
+    //'as' => 'api.',
+    'middleware' => ['cors']
+], function () {
+    Route::post('register/', 'Auth\ApiAuthController@register');
+    Route::post('login/', 'Auth\ApiAuthController@login');
+});

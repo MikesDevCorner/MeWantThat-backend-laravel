@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>ShoppingList Backend</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -48,6 +48,10 @@
                 font-size: 84px;
             }
 
+            .subtitle {
+                font-size: 30px;
+            }
+
             .links > a {
                 color: #636b6f;
                 padding: 0 25px;
@@ -59,7 +63,11 @@
             }
 
             .m-b-md {
-                margin-bottom: 30px;
+                margin-bottom: 93px;
+            }
+
+            .m-b-xs {
+                margin-bottom: -9px;
             }
         </style>
     </head>
@@ -80,19 +88,20 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+                <div class="title m-b-xs">
+                    MikesDevCorner
+                </div>
+                <div class="subtitle m-b-md">
+                    Masterthesis: ShoppingList Backend
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="/api/documentation">API</a>
+                    <a href="/downloads/ShoppingFlutter.apk">Flutter Build</a>
+                    <a href="/downloads/ShoppingIonic.apk">Ionic Build</a>
+                    <a href="http://github.com/mikesdevcorner">GitHub</a>
+                    <a href="https://at.linkedin.com/in/MichaelWagner8">LinkedIn</a>
+                    <a href="mailto:office@mikesdevcorner.com">Mail</a>
                 </div>
             </div>
         </div>

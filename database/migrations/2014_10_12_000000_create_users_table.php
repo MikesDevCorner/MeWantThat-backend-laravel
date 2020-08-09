@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEinkaufslistesTable extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreateEinkaufslistesTable extends Migration
      */
     public function up()
     {
-        Schema::create('einkaufslistes', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('listenname');
-            $table->unique('listenname');
+            $table->string('email')->unique();
+            $table->string('username')->unique();
+            $table->index('username');
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -28,6 +32,6 @@ class CreateEinkaufslistesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('einkaufslistes');
+        Schema::dropIfExists('users');
     }
 }

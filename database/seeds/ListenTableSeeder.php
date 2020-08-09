@@ -11,38 +11,38 @@ class ListenTableSeeder extends Seeder
      */
     public function run()
     {
-        App\Listenposten::truncate();
-        App\Einkaufsliste::truncate();
+        App\ShoppingListEntry::truncate();
+        App\ShoppingList::truncate();
 
-        App\Einkaufsliste::create([
+        App\ShoppingList::create([
             'listenname' => 'Spar'
         ]);
 
-        App\Einkaufsliste::create([
+        App\ShoppingList::create([
             'listenname' => 'Drogeriemarkt'
         ]);
 
-        App\Listenposten::create([
+        App\ShoppingListEntry::create([
             'postenname' => 'Käse',
             'anzahl' => 4,
             'einkaufsliste_id' => 1
         ]);
-        App\Listenposten::create([
+        App\ShoppingListEntry::create([
             'postenname' => 'Wurst',
             'anzahl' => 2,
             'einkaufsliste_id' => 1
         ]);
-        App\Listenposten::create([
+        App\ShoppingListEntry::create([
             'postenname' => 'Duschgel',
             'anzahl' => 1,
             'einkaufsliste_id' => 2
         ]);
-        App\Listenposten::create([
+        App\ShoppingListEntry::create([
             'postenname' => 'Seife',
             'anzahl' => 3,
             'einkaufsliste_id' => 2
         ]);
-        App\Listenposten::create([
+        App\ShoppingListEntry::create([
             'postenname' => 'Müllsäcke',
             'anzahl' => 5,
             'einkaufsliste_id' => 2
