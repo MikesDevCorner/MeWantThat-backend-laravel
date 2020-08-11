@@ -97,10 +97,10 @@
 
                 <div class="links">
                     <a href="/api/docs">API Docs</a>
-                    <a href="/downloads/Masterthesis.pdf">Thesis PDF</a>
+                    <a href="/downloads/Masterthesis.pdf" target="_blank">Thesis PDF</a>
                     <a href="/downloads/ShoppingFlutter.apk">Flutter Build</a>
                     <a href="/downloads/ShoppingIonic.apk">Ionic Build</a>
-                    <a href="http://github.com/mikesdevcorner">GitHub</a>
+                    <a href="http://github.com/mikesdevcorner" target="_blank">GitHub</a>
                     <a href="mailto:office@mikesdevcorner.com">Mail</a>
                 </div>
             </div>
