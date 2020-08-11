@@ -81,6 +81,9 @@
 <script src="{{ l5_swagger_asset('swagger-ui-standalone-preset.js') }}"> </script>
 <script>
 window.onload = function() {
+
+  var passwordClient = @json(\Laravel\Passport\Client::where('password_client', 1)->whereNull('user_id')->first());
+  var passwordClientSecret = @json(\Laravel\Passport\Client::where('password_client', 1)->whereNull('user_id')->first()->secret);
   // Build a system
   const ui = SwaggerUIBundle({
     dom_id: '#swagger-ui',
@@ -95,6 +98,18 @@ window.onload = function() {
       this.headers['X-CSRF-TOKEN'] = '{{ csrf_token() }}';
       return this;
     },
+    /*responseInterceptor: function (response) {
+
+      if (response.status >= 200 && response.status < 300) {
+          var docsUrl = @json(config('l5-swagger.paths.docs_json'));
+          var storageKeys = Object.keys(window.localStorage);
+
+          if (response.url.indexOf(docsUrl) < 0 && storageKeys.indexOf('token') < 0 && response.obj) {
+              window.localStorage.setItem('token', JSON.stringify(response.obj));
+          }
+      }
+      return response;
+    },*/
 
     presets: [
       SwaggerUIBundle.presets.apis,
@@ -106,7 +121,40 @@ window.onload = function() {
     ],
 
     layout: "StandaloneLayout"
-  })
+  });
+
+  if (passwordClient) {
+    ui.initOAuth({
+      clientId: passwordClient.id,
+      clientSecret: passwordClientSecret,
+    });
+  }
+
+  /*var tokenData = window.localStorage.getItem('token');
+  var token = null;
+  if (tokenData) {
+    try {
+      token = JSON.parse(tokenData);
+    } catch(e) {
+
+    }
+  }
+
+  if (token) {
+    ui.authActions.preAuthorizeImplicit({
+      auth: {
+        schema: {
+          flow: 'password',
+          get: function (key) {
+            return this[key];
+          }
+        },
+        name: 'passport'
+      },
+      token: token,
+      isValid: true
+    });
+  }*/
 
   window.ui = ui
 }

@@ -21,7 +21,7 @@ class ApiAuthController extends Controller
      *   operationId="login",
      *
      *   @OA\Parameter(
-     *      name="username",
+     *      name="email",
      *      in="query",
      *      required=true,
      *      @OA\Schema(
@@ -57,7 +57,7 @@ class ApiAuthController extends Controller
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'username' => 'required',
+            'email' => 'required|email',
             'password' => 'required'
         ]);
 
@@ -82,7 +82,7 @@ class ApiAuthController extends Controller
      *   operationId="register",
      *
      *  @OA\Parameter(
-     *      name="username",
+     *      name="name",
      *      in="query",
      *      required=true,
      *      @OA\Schema(
@@ -134,7 +134,7 @@ class ApiAuthController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'username' => 'required|unique:users',
+            'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed'
         ]);
@@ -147,7 +147,7 @@ class ApiAuthController extends Controller
         $input['password'] = Hash::make($input['password']);
         $user = User::create($input);
         $success['token'] =  $user->createToken('authToken')->accessToken;
-        $success['username'] =  $user->username;
+        $success['name'] =  $user->name;
         return response()->json(['success' => $success])->setStatusCode(Response::HTTP_CREATED);
     }
 

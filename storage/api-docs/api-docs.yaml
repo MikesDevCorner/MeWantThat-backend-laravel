@@ -186,7 +186,7 @@ paths:
       operationId: login
       parameters:
         -
-          name: username
+          name: email
           in: query
           required: true
           schema:
@@ -212,7 +212,7 @@ paths:
       operationId: register
       parameters:
         -
-          name: username
+          name: name
           in: query
           required: true
           schema:

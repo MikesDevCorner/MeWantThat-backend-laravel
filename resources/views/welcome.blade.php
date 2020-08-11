@@ -76,7 +76,7 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/home') }}">oAuth</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
@@ -96,11 +96,10 @@
                 </div>
 
                 <div class="links">
-                    <a href="/api/documentation">API</a>
+                    <a href="/api/docs">API</a>
                     <a href="/downloads/ShoppingFlutter.apk">Flutter Build</a>
                     <a href="/downloads/ShoppingIonic.apk">Ionic Build</a>
                     <a href="http://github.com/mikesdevcorner">GitHub</a>
-                    <a href="https://at.linkedin.com/in/MichaelWagner8">LinkedIn</a>
                     <a href="mailto:office@mikesdevcorner.com">Mail</a>
                 </div>
             </div>

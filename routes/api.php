@@ -16,11 +16,7 @@ use App\Http\Controllers\Auth\ApiAuthController;
 */
 
 
-Route::group([
-    //'prefix' => 'v1',
-    //'as' => 'api.',
-    'middleware' => ['auth:api', 'cors']
-], function () {
+Route::middleware(['auth:api'])->group(function () {
     Route::get('lists/', 'Api\ShoppinglistController@showLists');
     Route::post('list/', 'Api\ShoppinglistController@createList');
     Route::delete('list/{idList}/', 'Api\ShoppinglistController@deleteList');
@@ -31,11 +27,7 @@ Route::group([
 });
 
 
-Route::group([
-    //'prefix' => 'v1',
-    //'as' => 'api.',
-    'middleware' => ['cors']
-], function () {
+Route::group([], function () {
     Route::post('register/', 'Auth\ApiAuthController@register');
     Route::post('login/', 'Auth\ApiAuthController@login');
 });
