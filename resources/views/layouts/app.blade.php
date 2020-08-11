@@ -38,7 +38,7 @@
                       <li class="nav-item"><a class="nav-link" href="/downloads/ShoppingFlutter.apk">Flutter Build</a></li>
                       <li class="nav-item"><a class="nav-link" href="/downloads/ShoppingIonic.apk">Ionic Build</a></li>
                       <li class="nav-item"><a class="nav-link" href="http://github.com/mikesdevcorner" target="_blank">GitHub</a></li>
-                      <li class="nav-item"><a class="nav-link" href="mailto:office@mikesdevcorner.com">Mail</a></li>
+                      <li class="nav-item"><a class="nav-link" href="mailto:wagnmich@gmail.com">Mail</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

@@ -101,7 +101,7 @@
                     <a href="/downloads/ShoppingFlutter.apk">Flutter Build</a>
                     <a href="/downloads/ShoppingIonic.apk">Ionic Build</a>
                     <a href="http://github.com/mikesdevcorner" target="_blank">GitHub</a>
-                    <a href="mailto:office@mikesdevcorner.com">Mail</a>
+                    <a href="mailto:wagnmich@gmail.com">Mail</a>
                 </div>
             </div>
         </div>
