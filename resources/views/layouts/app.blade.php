@@ -33,7 +33,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                      <li class="nav-item"><a class="nav-link" href="/api/docs">API Docs</a></li>
+                      <li class="nav-item"><a class="nav-link" href="/api/docs" target="_blank">API Docs</a></li>
                       <li class="nav-item"><a class="nav-link" href="/downloads/Masterthesis.pdf" target="_blank">Thesis PDF</a></li>
                       <li class="nav-item"><a class="nav-link" href="/downloads/ShoppingFlutter.apk">Flutter Build</a></li>
                       <li class="nav-item"><a class="nav-link" href="/downloads/ShoppingIonic.apk">Ionic Build</a></li>

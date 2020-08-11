@@ -96,7 +96,7 @@
                 </div>
 
                 <div class="links">
-                    <a href="/api/docs">API Docs</a>
+                    <a href="/api/docs" target="_blank">API Docs</a>
                     <a href="/downloads/Masterthesis.pdf" target="_blank">Thesis PDF</a>
                     <a href="/downloads/ShoppingFlutter.apk">Flutter Build</a>
                     <a href="/downloads/ShoppingIonic.apk">Ionic Build</a>
