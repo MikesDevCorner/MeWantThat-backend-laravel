@@ -14,8 +14,8 @@ class ShoppinglistController extends Controller
 {
 
     /**
-     * @OA\GET(
-     ** path="/lists",
+     * @OA\Get(
+     *   path="/lists",
      *   tags={"List"},
      *   summary="Shows all available shopping lists for this user",
      *   operationId="showLists",
@@ -41,11 +41,11 @@ class ShoppinglistController extends Controller
     }
 
     /**
-     * @OA\POST(
-     ** path="/list",
+     * @OA\Post(
+     *   path="/list",
      *   tags={"List"},
      *   summary="Creates a new shopping list for this user",
-     *   operationId="createLists",
+     *   operationId="createList",
      *   security={
      *   {
      *      "passport": {}},
@@ -83,8 +83,8 @@ class ShoppinglistController extends Controller
     }
 
     /**
-     * @OA\DELETE(
-     ** path="/list/{idList}",
+     * @OA\Delete(
+     *   path="/list/{idList}",
      *   tags={"List"},
      *   summary="Deletes users shopping list with the given ID",
      *   operationId="deleteList",
@@ -128,7 +128,7 @@ class ShoppinglistController extends Controller
     }
 
     /**
-     * @OA\GET(
+     * @OA\Get(
      ** path="/list/{idList}/entries",
      *   tags={"List"},
      *   summary="Shows all available shopping list entries from the given shopping list for this user",
@@ -172,11 +172,11 @@ class ShoppinglistController extends Controller
     }
 
     /**
-     * @OA\POST(
-     ** path="/list/{idList}/entry",
+     * @OA\Post(
+     *   path="/list/{idList}/entry",
      *   tags={"List"},
      *   summary="Creates a new shopping list entry on the given shopping list for this user",
-     *   operationId="createEntry",
+     *   operationId="createListEntry",
      *   security={
      *   {
      *      "passport": {}},
@@ -235,11 +235,11 @@ class ShoppinglistController extends Controller
     }
 
     /**
-     * @OA\DELETE(
+     * @OA\Delete (
      ** path="/entry/{idList}",
      *   tags={"List"},
      *   summary="Deletes users shopping list entry with the given ID, regardless on wich list it is. It must be owned by the user, tho.",
-     *   operationId="deleteList",
+     *   operationId="deleteListEntry",
      *   security={
      *   {
      *      "passport": {}},
