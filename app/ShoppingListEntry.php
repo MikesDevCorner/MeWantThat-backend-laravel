@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShoppingListEntry extends Model
 {
-    protected $fillable = ['entryname', 'amount', 'shoppinglist_id'];
+    protected $fillable = ['entryname', 'amount', 'shopping_list_id'];
 
     public function list()
     {

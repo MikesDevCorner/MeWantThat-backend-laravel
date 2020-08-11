@@ -62,8 +62,8 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
+                    "201": {
+                        "description": "Created",
                         "content": {
                             "application/json": {}
                         }
@@ -111,12 +111,6 @@
                     },
                     "400": {
                         "description": "Bad Request"
-                    },
-                    "404": {
-                        "description": "not found"
-                    },
-                    "403": {
-                        "description": "Forbidden"
                     }
                 },
                 "security": [
@@ -126,7 +120,7 @@
                 ]
             }
         },
-        "list/{idList}/entries": {
+        "/list/{idList}/entries": {
             "get": {
                 "tags": [
                     "List"
@@ -155,12 +149,6 @@
                     },
                     "400": {
                         "description": "Bad Request"
-                    },
-                    "404": {
-                        "description": "not found"
-                    },
-                    "403": {
-                        "description": "Forbidden"
                     }
                 },
                 "security": [
@@ -187,7 +175,7 @@
                         }
                     },
                     {
-                        "name": "listname",
+                        "name": "entryname",
                         "in": "query",
                         "required": true,
                         "schema": {
@@ -233,7 +221,7 @@
                 "operationId": "deleteList",
                 "parameters": [
                     {
-                        "name": "idList",
+                        "name": "$id",
                         "in": "path",
                         "required": true,
                         "schema": {
@@ -253,12 +241,6 @@
                     },
                     "400": {
                         "description": "Bad Request"
-                    },
-                    "404": {
-                        "description": "not found"
-                    },
-                    "403": {
-                        "description": "Forbidden"
                     }
                 },
                 "security": [
@@ -273,7 +255,7 @@
                 "tags": [
                     "Auth"
                 ],
-                "summary": "Login",
+                "summary": "Logs user in and creates new auth token",
                 "operationId": "login",
                 "parameters": [
                     {
@@ -311,7 +293,7 @@
                 "tags": [
                     "Auth"
                 ],
-                "summary": "Register",
+                "summary": "Register new user",
                 "operationId": "register",
                 "parameters": [
                     {
@@ -358,6 +340,31 @@
                         "description": "Bad Request"
                     }
                 }
+            }
+        },
+        "/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Revokes current access token",
+                "operationId": "logout",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
             }
         },
         "/me": {

@@ -17,7 +17,7 @@ class ApiAuthController extends Controller
      * @OA\Post(
      ** path="/login",
      *   tags={"Auth"},
-     *   summary="Login",
+     *   summary="Logs user in and creates new auth token",
      *   operationId="login",
      *
      *   @OA\Parameter(
@@ -78,7 +78,7 @@ class ApiAuthController extends Controller
      * @OA\Post(
      ** path="/register",
      *   tags={"Auth"},
-     *   summary="Register",
+     *   summary="Register new user",
      *   operationId="register",
      *
      *  @OA\Parameter(
@@ -151,6 +151,42 @@ class ApiAuthController extends Controller
         return response()->json(['success' => $success])->setStatusCode(Response::HTTP_CREATED);
     }
 
+
+    /**
+     * @OA\Post(
+     ** path="/logout",
+     *   tags={"Auth"},
+     *   summary="Revokes current access token",
+     *   operationId="logout",
+     *   security={
+     *   {
+     *      "passport": {}},
+     *   },
+     *   @OA\Response(
+     *      response=200,
+     *       description="Success",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=401,
+     *       description="Unauthenticated"
+     *   )
+     *)
+     **/
+    /**
+     * details api
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function logout(Request $request)
+    {
+      $request->user()->token()->revoke();
+    }
+
+
+
     /**
      * @OA\Get(
      ** path="/me",
@@ -179,9 +215,9 @@ class ApiAuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function me()
+    public function me(Request $request)
     {
-        $user = Auth::user();
-        return response()->json(['success' => $user], Response::HTTP_OK);
+        return response()->json(['success' => $request->user()], Response::HTTP_OK);
     }
+
 }

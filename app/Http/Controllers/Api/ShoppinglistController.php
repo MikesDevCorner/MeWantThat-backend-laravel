@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use App\ShoppingListEntry;
 use App\ShoppingList;
 use App\Http\Controllers\Controller;
@@ -35,7 +37,7 @@ class ShoppinglistController extends Controller
      *)
      **/
     public function showLists() {
-        return ShoppingList::all();
+        return response()->json(ShoppingList::where('user_id', Auth::user()->id)->get(), Response::HTTP_OK);
     }
 
     /**
@@ -57,8 +59,8 @@ class ShoppinglistController extends Controller
      *      )
      *   ),
      *  @OA\Response(
-     *      response=200,
-     *      description="Success",
+     *      response=201,
+     *      description="Created",
      *      @OA\MediaType(
      *           mediaType="application/json",
      *      )
@@ -74,8 +76,10 @@ class ShoppinglistController extends Controller
      *)
      **/
     public function createList(Request $request) {
-        $newList = ShoppingList::create($request->all());
-        return response()->json($newList, 201);
+        $vals = $request->all();
+        $vals['user_id'] = Auth::user()->id;
+        $newList = ShoppingList::create($vals);
+        return response()->json($newList, Response::HTTP_CREATED);
     }
 
     /**
@@ -110,26 +114,22 @@ class ShoppinglistController extends Controller
      *   @OA\Response(
      *      response=400,
      *      description="Bad Request"
-     *   ),
-     *   @OA\Response(
-     *      response=404,
-     *      description="not found"
-     *   ),
-     *   @OA\Response(
-     *       response=403,
-     *       description="Forbidden"
      *   )
      *)
      **/
     public function deleteList(int $idList) {
-        $list = ShoppingList::find($idList);
-        $list->delete();
-        return response()->json(null, 204);
+      try {
+        $list = ShoppingList::where('user_id', Auth::user()->id)->where('id', '=', $idList)->firstOrFail();
+      } catch(\Exception $ex) {
+        return response()->json(['error' => 'list not found for user '.Auth::user()->id], Response::HTTP_BAD_REQUEST);
+      }
+      $list->delete();
+      return response()->json(null, Response::HTTP_OK);
     }
 
     /**
      * @OA\GET(
-     ** path="list/{idList}/entries",
+     ** path="/list/{idList}/entries",
      *   tags={"List"},
      *   summary="Shows all available shopping list entries from the given shopping list for this user",
      *   operationId="showListEntries",
@@ -159,20 +159,16 @@ class ShoppinglistController extends Controller
      *   @OA\Response(
      *      response=400,
      *      description="Bad Request"
-     *   ),
-     *   @OA\Response(
-     *      response=404,
-     *      description="not found"
-     *   ),
-     *   @OA\Response(
-     *       response=403,
-     *       description="Forbidden"
      *   )
      *)
      **/
     public function showListEntries(int $idList) {
-        $list = ShoppingList::find($idList);
-        return $list->entries;
+        try {
+          $list = ShoppingList::where('user_id', Auth::user()->id)->where('id', $idList)->firstOrFail();
+        } catch(\Exception $ex) {
+          return response()->json(['error' => 'list not found for user '.Auth::user()->id], Response::HTTP_BAD_REQUEST);
+        }
+        return response()->json($list->entries, Response::HTTP_OK);
     }
 
     /**
@@ -194,7 +190,7 @@ class ShoppinglistController extends Controller
      *      )
      *   ),
      *  @OA\Parameter(
-     *      name="listname",
+     *      name="entryname",
      *      in="query",
      *      required=true,
      *      @OA\Schema(
@@ -226,9 +222,16 @@ class ShoppinglistController extends Controller
      *   )
      *)
      **/
-    public function createEntry(Request $request) {
-        $newPosten = ShoppingListEntry::create($request->all());
-        return response()->json($newPosten, 201);
+    public function createEntry(Request $request, int $shopping_list_id) {
+        $vals = $request->all();
+        try {
+          $list = ShoppingList::where('user_id', Auth::user()->id)->where('id', $shopping_list_id)->firstOrFail();
+        } catch(\Exception $ex) {
+          return response()->json(['error' => 'list not found for user '.Auth::user()->id], Response::HTTP_BAD_REQUEST);
+        }
+        $vals['shopping_list_id'] = $list->id;
+        $newPosten = ShoppingListEntry::create($vals);
+        return response()->json($newPosten, Response::HTTP_CREATED);
     }
 
     /**
@@ -242,7 +245,7 @@ class ShoppinglistController extends Controller
      *      "passport": {}},
      *   },
      *  @OA\Parameter(
-     *      name="idList",
+     *      name="$id",
      *      in="path",
      *      required=true,
      *      @OA\Schema(
@@ -263,20 +266,16 @@ class ShoppinglistController extends Controller
      *   @OA\Response(
      *      response=400,
      *      description="Bad Request"
-     *   ),
-     *   @OA\Response(
-     *      response=404,
-     *      description="not found"
-     *   ),
-     *   @OA\Response(
-     *       response=403,
-     *       description="Forbidden"
      *   )
      *)
      **/
     public function deleteEntry(int $id) {
         $entry = ShoppingListEntry::find($id);
-        $entry->delete();
-        return response()->json(null, 204);
+        if($entry->list->user_id != Auth::user()->id) {
+          return response()->json(['error' => 'list not found'], Response::HTTP_BAD_REQUEST);
+        } else {
+          $entry->delete();
+          return response()->json(null, Response::HTTP_OK);
+        }
     }
 }

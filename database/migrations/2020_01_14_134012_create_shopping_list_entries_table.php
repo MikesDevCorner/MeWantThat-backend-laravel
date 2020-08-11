@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateShoppingListEntrysTable extends Migration
+class CreateShoppingListEntriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateShoppingListEntrysTable extends Migration
      */
     public function up()
     {
-        Schema::create('shopping_list_entrys', function (Blueprint $table) {
+        Schema::create('shopping_list_entries', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('postenname');
-            $table->integer('anzahl');
-            $table->unsignedBigInteger('einkaufsliste_id');
-            $table->foreign('einkaufsliste_id')->references('id')->on('einkaufslistes')->onDelete('cascade');
+            $table->string('entryname');
+            $table->integer('amount');
+            $table->unsignedBigInteger('shopping_list_id');
+            $table->foreign('shopping_list_id')->references('id')->on('shopping_lists')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateShoppingListEntrysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shopping_list_entrys');
+        Schema::dropIfExists('shopping_list_entries');
     }
 }

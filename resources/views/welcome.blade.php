@@ -89,10 +89,10 @@
 
             <div class="content">
                 <div class="title m-b-xs">
-                    MikesDevCorner
+                  Shopping List: Backend
                 </div>
                 <div class="subtitle m-b-md">
-                    Masterthesis: ShoppingList Backend
+                    Masterthesis 2020, Michael Wagner
                 </div>
 
                 <div class="links">
