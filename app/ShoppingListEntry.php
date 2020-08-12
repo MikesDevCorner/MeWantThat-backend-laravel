@@ -8,7 +8,7 @@ class ShoppingListEntry extends Model
 {
     protected $fillable = ['entryname', 'amount', 'shopping_list_id'];
 
-    public function list()
+    public function ShoppingList()
     {
         return $this->belongsTo('App\ShoppingList');
     }

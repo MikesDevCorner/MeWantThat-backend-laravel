@@ -19,7 +19,7 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
-    public function einkaufslisten()
+    public function lists()
     {
         return $this->hasMany('App\ShoppingList');
     }

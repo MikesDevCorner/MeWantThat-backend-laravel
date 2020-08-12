@@ -16,7 +16,7 @@ class ApiAuthController extends Controller
     /**
      * @OA\Post(
      ** path="/login",
-     *   tags={"Auth"},
+     *   tags={"Simple Auth"},
      *   summary="Logs user in and creates new auth token",
      *   operationId="login",
      *
@@ -66,7 +66,7 @@ class ApiAuthController extends Controller
         }
 
         if (!auth()->attempt($validator->validate())) {
-            return response()->json(['error' => 'Unauthorised'], 401);
+            return response()->json(['error' => 'Unauthorised'], Response::HTTP_UNAUTHORIZED);
         } else {
             $success['token'] = auth()->user()->createToken('authToken')->accessToken;
             $success['user'] = auth()->user();
@@ -77,7 +77,7 @@ class ApiAuthController extends Controller
     /**
      * @OA\Post(
      ** path="/register",
-     *   tags={"Auth"},
+     *   tags={"Simple Auth"},
      *   summary="Register new user",
      *   operationId="register",
      *
@@ -147,7 +147,7 @@ class ApiAuthController extends Controller
         $input['password'] = Hash::make($input['password']);
         $user = User::create($input);
         $success['token'] =  $user->createToken('authToken')->accessToken;
-        $success['name'] =  $user->name;
+        $success['user'] = $user;
         return response()->json(['success' => $success])->setStatusCode(Response::HTTP_CREATED);
     }
 
@@ -155,7 +155,7 @@ class ApiAuthController extends Controller
     /**
      * @OA\Post(
      ** path="/logout",
-     *   tags={"Auth"},
+     *   tags={"Simple Auth"},
      *   summary="Revokes current access token",
      *   operationId="logout",
      *   security={
@@ -190,7 +190,7 @@ class ApiAuthController extends Controller
     /**
      * @OA\Get(
      ** path="/me",
-     *   tags={"Auth"},
+     *   tags={"Simple Auth"},
      *   summary="Shows info about logged in user",
      *   operationId="me",
      *   security={

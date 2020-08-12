@@ -50,7 +50,7 @@
                     "List"
                 ],
                 "summary": "Creates a new shopping list for this user",
-                "operationId": "createLists",
+                "operationId": "createList",
                 "parameters": [
                     {
                         "name": "listname",
@@ -164,7 +164,7 @@
                     "List"
                 ],
                 "summary": "Creates a new shopping list entry on the given shopping list for this user",
-                "operationId": "createEntry",
+                "operationId": "createListEntry",
                 "parameters": [
                     {
                         "name": "idList",
@@ -212,13 +212,13 @@
                 ]
             }
         },
-        "/entry/{idList}": {
+        "/entry/{id}": {
             "delete": {
                 "tags": [
                     "List"
                 ],
                 "summary": "Deletes users shopping list entry with the given ID, regardless on wich list it is. It must be owned by the user, tho.",
-                "operationId": "deleteList",
+                "operationId": "deleteListEntry",
                 "parameters": [
                     {
                         "name": "$id",
@@ -253,7 +253,7 @@
         "/login": {
             "post": {
                 "tags": [
-                    "Auth"
+                    "Simple Auth"
                 ],
                 "summary": "Logs user in and creates new auth token",
                 "operationId": "login",
@@ -291,7 +291,7 @@
         "/register": {
             "post": {
                 "tags": [
-                    "Auth"
+                    "Simple Auth"
                 ],
                 "summary": "Register new user",
                 "operationId": "register",
@@ -345,7 +345,7 @@
         "/logout": {
             "post": {
                 "tags": [
-                    "Auth"
+                    "Simple Auth"
                 ],
                 "summary": "Revokes current access token",
                 "operationId": "logout",
@@ -370,7 +370,7 @@
         "/me": {
             "get": {
                 "tags": [
-                    "Auth"
+                    "Simple Auth"
                 ],
                 "summary": "Shows info about logged in user",
                 "operationId": "me",

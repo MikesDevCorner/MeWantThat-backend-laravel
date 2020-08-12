@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\ShoppingListEntry;
 use App\ShoppingList;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 
 class ShoppinglistController extends Controller
@@ -76,6 +77,14 @@ class ShoppinglistController extends Controller
      *)
      **/
     public function createList(Request $request) {
+        $validator = Validator::make($request->all(), [
+          'listname' => 'required|max:60'
+        ]);
+
+        if ($validator->fails()) {
+          return response()->json(['error' => $validator->errors()], Response::HTTP_BAD_REQUEST);
+        }
+
         $vals = $request->all();
         $vals['user_id'] = Auth::user()->id;
         $newList = ShoppingList::create($vals);
@@ -223,6 +232,15 @@ class ShoppinglistController extends Controller
      *)
      **/
     public function createEntry(Request $request, int $shopping_list_id) {
+        $validator = Validator::make($request->all(), [
+          'entryname' => 'required|max:60',
+          'amount' => 'required|numeric'
+        ]);
+
+        if ($validator->fails()) {
+          return response()->json(['error' => $validator->errors()], Response::HTTP_BAD_REQUEST);
+        }
+
         $vals = $request->all();
         try {
           $list = ShoppingList::where('user_id', Auth::user()->id)->where('id', $shopping_list_id)->firstOrFail();
@@ -236,7 +254,7 @@ class ShoppinglistController extends Controller
 
     /**
      * @OA\Delete (
-     ** path="/entry/{idList}",
+     ** path="/entry/{id}",
      *   tags={"List"},
      *   summary="Deletes users shopping list entry with the given ID, regardless on wich list it is. It must be owned by the user, tho.",
      *   operationId="deleteListEntry",
@@ -271,7 +289,7 @@ class ShoppinglistController extends Controller
      **/
     public function deleteEntry(int $id) {
         $entry = ShoppingListEntry::find($id);
-        if($entry->list->user_id != Auth::user()->id) {
+        if($entry->ShoppingList->user_id != Auth::user()->id) {
           return response()->json(['error' => 'list not found'], Response::HTTP_BAD_REQUEST);
         } else {
           $entry->delete();

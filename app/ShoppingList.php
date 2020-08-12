@@ -13,7 +13,7 @@ class ShoppingList extends Model
         return $this->hasMany('App\ShoppingListEntry');
     }
 
-    public function list()
+    public function user()
     {
         return $this->belongsTo('App\User');
     }
