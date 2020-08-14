@@ -1,0 +1,293 @@
+openapi: 3.0.0
+info:
+  title: 'ShoppingList API Docs'
+  description: 'Implementation of REST API and Swagger for Masterthesis Example called ShoppingList'
+  contact:
+    email: wagnmich@gmail.com
+  license:
+    name: 'Apache 2.0'
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost:8000/api'
+    description: 'Shoppinglist Backend'
+paths:
+  /lists:
+    get:
+      tags:
+        - List
+      summary: 'Shows all available shopping lists for this user'
+      operationId: showLists
+      responses:
+        200:
+          description: Success
+          content:
+            application/json: []
+        401:
+          description: Unauthenticated
+      security:
+        -
+          passport: []
+  /list:
+    post:
+      tags:
+        - List
+      summary: 'Creates a new shopping list for this user'
+      operationId: createList
+      parameters:
+        -
+          name: listname
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        201:
+          description: Created
+          content:
+            application/json: []
+        401:
+          description: Unauthenticated
+        400:
+          description: 'Bad Request'
+      security:
+        -
+          passport: []
+  '/list/{idList}':
+    delete:
+      tags:
+        - List
+      summary: 'Deletes users shopping list with the given ID'
+      operationId: deleteList
+      parameters:
+        -
+          name: idList
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Success
+          content:
+            application/json: []
+        401:
+          description: Unauthenticated
+        400:
+          description: 'Bad Request'
+      security:
+        -
+          passport: []
+  '/list/{idList}/entries':
+    get:
+      tags:
+        - List
+      summary: 'Shows all available shopping list entries from the given shopping list for this user'
+      operationId: showListEntries
+      parameters:
+        -
+          name: idList
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Success
+          content:
+            application/json: []
+        401:
+          description: Unauthenticated
+        400:
+          description: 'Bad Request'
+      security:
+        -
+          passport: []
+  '/list/{idList}/entry':
+    post:
+      tags:
+        - List
+      summary: 'Creates a new shopping list entry on the given shopping list for this user'
+      operationId: createListEntry
+      parameters:
+        -
+          name: idList
+          in: path
+          required: true
+          schema:
+            type: integer
+        -
+          name: entryname
+          in: query
+          required: true
+          schema:
+            type: string
+        -
+          name: amount
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Success
+          content:
+            application/json: []
+        401:
+          description: Unauthenticated
+        400:
+          description: 'Bad Request'
+      security:
+        -
+          passport: []
+  '/entry/{id}':
+    delete:
+      tags:
+        - List
+      summary: 'Deletes users shopping list entry with the given ID, regardless on wich list it is. It must be owned by the user, tho.'
+      operationId: deleteListEntry
+      parameters:
+        -
+          name: $id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Success
+          content:
+            application/json: []
+        401:
+          description: Unauthenticated
+        400:
+          description: 'Bad Request'
+      security:
+        -
+          passport: []
+  /login:
+    post:
+      tags:
+        - 'Simple Auth'
+      summary: 'Logs user in and creates new auth token'
+      operationId: login
+      parameters:
+        -
+          name: email
+          in: query
+          required: true
+          schema:
+            type: string
+        -
+          name: password
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        202:
+          description: Accepted
+          content:
+            application/json: []
+        401:
+          description: 'Unauthenticated: Authorization information is missing or invalid.'
+  /register:
+    post:
+      tags:
+        - 'Simple Auth'
+      summary: 'Register new user'
+      operationId: register
+      parameters:
+        -
+          name: name
+          in: query
+          required: true
+          schema:
+            type: string
+        -
+          name: email
+          in: query
+          required: true
+          schema:
+            type: string
+        -
+          name: password
+          in: query
+          required: true
+          schema:
+            type: string
+        -
+          name: password_confirmation
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        201:
+          description: Success
+          content:
+            application/json: []
+        400:
+          description: 'Bad Request'
+  /logout:
+    post:
+      tags:
+        - 'Simple Auth'
+      summary: 'Revokes current access token'
+      operationId: logout
+      responses:
+        200:
+          description: Success
+          content:
+            application/json: []
+        401:
+          description: Unauthenticated
+      security:
+        -
+          passport: []
+  /unregister:
+    post:
+      tags:
+        - 'Simple Auth'
+      summary: 'Deletes all user data from system'
+      operationId: unregister
+      responses:
+        200:
+          description: Success
+          content:
+            application/json: []
+        401:
+          description: Unauthenticated
+      security:
+        -
+          passport: []
+  /me:
+    get:
+      tags:
+        - 'Simple Auth'
+      summary: 'Shows info about logged in user'
+      operationId: me
+      responses:
+        200:
+          description: Success
+          content:
+            application/json: []
+        401:
+          description: Unauthenticated
+      security:
+        -
+          passport: []
+components:
+  securitySchemes:
+    passport:
+      type: oauth2
+      description: 'Laravel passport oauth2 security.'
+      in: header
+      scheme: https
+      flows:
+        password:
+          authorizationUrl: 'http://localhost:8000/oauth/authorize'
+          tokenUrl: 'http://localhost:8000/oauth/token'
+          refreshUrl: 'http://localhost:8000/token/refresh'
+          scopes: []

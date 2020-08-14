@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateListenpostensTable extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateListenpostensTable extends Migration
      */
     public function up()
     {
-        Schema::create('listenpostens', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('postenname');
-            $table->integer('anzahl');
-            $table->unsignedBigInteger('einkaufsliste_id');
-            $table->foreign('einkaufsliste_id')->references('id')->on('einkaufslistes')->onDelete('cascade');
+            $table->string('email')->unique();
+            $table->string('name');
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateListenpostensTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('listenpostens');
+        Schema::dropIfExists('users');
     }
 }

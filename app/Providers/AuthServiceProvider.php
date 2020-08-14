@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Route;
+use Laravel\Passport\Passport; // added
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Model' => 'App\Policies\ModelPolicy',
+        'App\Model' => 'App\Policies\ModelPolicy', //uncommented
     ];
 
     /**
@@ -24,7 +26,15 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+        /*Passport::tokensCan([
+          'use-api' => 'Use the REST API for this application'
+        ]);*/
+        Passport::routes();
 
-        //
+        Passport::tokensExpireIn(now()->addDays(10));
+
+        Passport::refreshTokensExpireIn(now()->addDays(60));
+
+        Passport::personalAccessTokensExpireIn(now()->addMonths(8));
     }
 }
