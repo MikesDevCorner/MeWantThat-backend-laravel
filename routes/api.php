@@ -25,6 +25,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::delete('entry/{id}/', 'Api\ShoppinglistController@deleteEntry');
     Route::get('me/', 'Auth\ApiAuthController@me');
     Route::post('logout/', 'Auth\ApiAuthController@logout');
+    Route::post('unregister/', 'Auth\ApiAuthController@unregister');
 });
 
 

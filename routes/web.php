@@ -14,5 +14,6 @@
 Auth::routes();
 
 Route::get('/', 'Web\HomeController@welcome')->name('welcome')->middleware('guest');
-Route::get('/home', 'Web\HomeController@index')->name('home');
-Route::get('/oauth', 'Web\HomeController@oauth')->name('oauth');
+Route::get('/home', 'Web\HomeController@index')->name('home')->middleware('auth:web');
+Route::get('/oauth', 'Web\HomeController@oauth')->name('oauth')->middleware('auth:web');
+Route::get('/unregister', 'Web\HomeController@unregister')->name('unregister')->middleware('auth:web');

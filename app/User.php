@@ -41,4 +41,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+  // this is a recommended way to declare event handlers
+  public static function boot() {
+    parent::boot();
+
+    static::deleting(function($user) { // cleanup
+      foreach($user->lists as $list) { $list->delete(); }
+    });
+  }
 }

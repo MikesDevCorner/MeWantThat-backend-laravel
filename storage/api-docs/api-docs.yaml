@@ -246,6 +246,22 @@ paths:
       security:
         -
           passport: []
+  /unregister:
+    post:
+      tags:
+        - 'Simple Auth'
+      summary: 'Deletes all user data from system'
+      operationId: unregister
+      responses:
+        200:
+          description: Success
+          content:
+            application/json: []
+        401:
+          description: Unauthenticated
+      security:
+        -
+          passport: []
   /me:
     get:
       tags:

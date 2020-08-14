@@ -74,6 +74,7 @@ class ApiAuthController extends Controller
         }
     }
 
+
     /**
      * @OA\Post(
      ** path="/register",
@@ -183,7 +184,44 @@ class ApiAuthController extends Controller
     public function logout(Request $request)
     {
       $request->user()->token()->revoke();
+      return response()->json(null, Response::HTTP_OK);
     }
+
+
+  /**
+   * @OA\Post(
+   ** path="/unregister",
+   *   tags={"Simple Auth"},
+   *   summary="Deletes all user data from system",
+   *   operationId="unregister",
+   *   security={
+   *   {
+   *      "passport": {}},
+   *   },
+   *   @OA\Response(
+   *      response=200,
+   *       description="Success",
+   *      @OA\MediaType(
+   *           mediaType="application/json",
+   *      )
+   *   ),
+   *   @OA\Response(
+   *      response=401,
+   *       description="Unauthenticated"
+   *   )
+   *)
+   **/
+  /**
+   * details api
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function unregister(Request $request)
+  {
+    $user = User::where('id', Auth::user()->id)->firstOrFail();
+    $user->delete();
+    return response()->json(null, Response::HTTP_OK);
+  }
 
 
 
