@@ -12,8 +12,8 @@ class Controller extends BaseController
     /**
      * @OA\Info(
      *      version="1.0.0",
-     *      title="ShoppingList API Docs",
-     *      description="Implementation of REST API and Swagger for Masterthesis Example called ShoppingList",
+     *      title="Me Want That - API Docs",
+     *      description="Implementation of REST API and Swagger for App ME WANT THAT",
      *      @OA\Contact(
      *          email="wagnmich@gmail.com"
      *      ),
@@ -25,7 +25,7 @@ class Controller extends BaseController
      *
      * @OA\Server(
      *      url=L5_SWAGGER_CONST_HOST,
-     *      description="Shoppinglist Backend"
+     *      description="Me Want That Backend"
      * )
 
      *
