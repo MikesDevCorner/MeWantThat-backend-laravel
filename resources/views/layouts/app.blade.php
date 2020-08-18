@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container" style="max-width: 100%;">
                 <!--a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'ShoppingList Backend') }}
+                    {{ config('app.name', 'Me Want That') }}
                 </a-->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -35,8 +35,8 @@
                     <ul class="navbar-nav mr-auto">
                       <li class="nav-item"><a class="nav-link" href="/api/docs" target="_blank">API Docs</a></li>
                       <li class="nav-item"><a class="nav-link" href="/downloads/Masterthesis.pdf" target="_blank">Thesis PDF</a></li>
-                      <li class="nav-item"><a class="nav-link" href="/downloads/ShoppingFlutter.apk">Flutter Build</a></li>
-                      <li class="nav-item"><a class="nav-link" href="/downloads/ShoppingIonic.apk">Ionic Build</a></li>
+                      <li class="nav-item"><a class="nav-link" href="/downloads/MeWantThatFlutter.apk">Flutter Build</a></li>
+                      <li class="nav-item"><a class="nav-link" href="/downloads/MeWantThatIonic.apk">Ionic Build</a></li>
                       <li class="nav-item"><a class="nav-link" href="http://github.com/mikesdevcorner" target="_blank">GitHub</a></li>
                       <li class="nav-item"><a class="nav-link" href="mailto:wagnmich@gmail.com">Mail</a></li>
                     </ul>
