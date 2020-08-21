@@ -1,29 +1,86 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+# Me Want That - PHP/Laravel Backend with oAuth and Swagger Docs
 
-## Laravel Commands
+This repo contains the backendlogic MVC application for the ME WANT THAT shopping list REST API. Built with Laravel on top of PHP, mySQL, Open API and oAuth2. It started 2020 as an example for a Masterthesis about Mobile Cross Platform Development (Tag v2.0). 
 
-```php artisan list```<br>
-lists commands
+## Prerequisites
 
-```php artisan tinker```<br>
-evaluates php and eloquent on the fly
+You're going to need
+* PHP 7.4+
+* Composer
 
-```php artisan make:command CommandName```
+installed and available on your commandline. I recommend JetBrains PHPStorm with as preferred Development IDE. Because Laravel uses parts of Symfony, the commandline utilizes artisan commands.
 
-```php artisan --version```
+## Some useful commmands
 
-```php artisan migrate```
+```bash
+php artisan list
+```
 
-```php artisan migrate:rollback```
+```bash
+php artisan tinker
+```
 
-```php artisan migrate:make create_users_table```
+```bash
+php artisan make:command ShoppingListCommand
+```
 
-```php artisan serve```
+```bash
+php artisian make:model ShoppingList -m
+```
 
-```php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"```
+```bash
+php artisan --version
+```
 
-```php artisan passport:install```
+```bash
+php artisan migrate
+```
 
-```php artisan vendor:publish --tag=passport-components```
+```bash
+php artisan migrate:rollback
+```
 
-```php artisan passport:keys```
+```bash
+php artisan migrate:make create_users_table
+```
+
+```bash
+php artisan serve
+```
+
+```bash
+php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
+```
+
+```bash
+php artisan passport:install
+```
+
+```bash
+php artisan vendor:publish --tag=passport-components
+```
+
+```bash
+php artisan passport:keys
+```
+
+```bash
+composer require laravel/passport
+```
+
+```bash
+composer require "darkaonline/l5-swagger:7.*"
+```
+
+```bash
+php artisan l5-swagger: generate
+```
+
+
+Checkout [Laravel Docs](https://laravel.com/docs/7.x/) for further knowledge
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
+
+## Author
+[Michael Wagner](https://mikesdevcorner.com)
